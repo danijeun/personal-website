@@ -1,0 +1,44 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Daniel Jeun",
+  description = "Daniel Jeun Valenzuela. AI engineer, NJIT '26. Newark, NJ.",
+} = Astro.props;
+
+const fullTitle = title === "Daniel Jeun" ? title : `${title} — Daniel Jeun`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="author" content="Daniel Jeun Valenzuela" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content="#f7f3ec" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url.toString()} />
+    <title>{fullTitle}</title>
+  </head>
+  <body class="bg-[var(--color-cream)] text-[var(--color-ink)]">
+    <a
+      href="#main"
+      class="absolute left-2 top-2 -translate-y-20 focus-visible:translate-y-0 bg-[var(--color-ink)] text-[var(--color-cream)] px-3 py-2 text-sm font-[var(--font-sans)] z-50 transition-transform"
+      style="border-bottom: 0;"
+    >
+      Skip to main content
+    </a>
+    <main id="main">
+      <slot />
+    </main>
+  </body>
+</html>

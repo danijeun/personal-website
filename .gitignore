@@ -1,0 +1,35 @@
+# build
+dist/
+.astro/
+.vercel/
+
+# deps
+node_modules/
+
+# env
+.env
+.env.local
+.env.*.local
+
+# logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# os
+.DS_Store
+Thumbs.db
+
+# ide
+.vscode/
+.idea/
+
+# tests
+test-results/
+playwright-report/
+playwright/.cache/
+
+# rag service local
+rag-service/.venv/
+rag-service/__pycache__/
+rag-service/*.pyc
