@@ -8,6 +8,7 @@ import Byline from "../components/ui/Byline.astro";
 import SectionRule from "../components/ui/SectionRule.astro";
 import Figure from "../components/ui/Figure.astro";
 import FactBox from "../components/ui/FactBox.astro";
+import headshot from "../assets/headshot.jpg";
 
 const facts = [
   { label: "Education", value: "B.S. + M.S. Computer Science and Data Science, NJIT, '26" },
@@ -39,9 +40,9 @@ const facts = [
     <SectionRule class="mt-8" />
 
     <Figure
-      src="https://placehold.co/800x800/efe9dc/111111/png?text=Headshot+placeholder"
-      alt="Headshot of Daniel Jeun, placeholder."
-      caption="Headshot pending. Will be replaced before launch."
+      src={headshot}
+      alt="Daniel Jeun, looking at the camera."
+      caption="Daniel Jeun. Newark, 2026."
     />
 
     <div class="prose-article">
