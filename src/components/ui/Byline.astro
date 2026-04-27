@@ -2,9 +2,29 @@
 interface Props {
   author?: string;
   dateline?: string;
+  live?: boolean;
+  location?: string;
   class?: string;
 }
-const { author = "Daniel Jeun", dateline, class: className = "" } = Astro.props;
+const {
+  author = "Daniel Jeun",
+  dateline,
+  live = false,
+  location = "Newark",
+  class: className = "",
+} = Astro.props;
+
+// Build time fallback for crawlers and no JS visitors. Localized to America/New_York
+// so the cached HTML still shows a sensible date until the client script runs.
+const fallback = live
+  ? `${location}, ${new Date().toLocaleDateString("en-US", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      timeZone: "America/New_York",
+    })}`
+  : null;
 ---
 
 <p
@@ -12,11 +32,38 @@ const { author = "Daniel Jeun", dateline, class: className = "" } = Astro.props;
 >
   <span class="text-[var(--color-ink)]">By {author}</span>
   {
-    dateline && (
+    (dateline || live) && (
       <>
-        <span aria-hidden="true" class="text-[var(--color-rule)]">|</span>
-        <span class="italic">{dateline}</span>
+        <span aria-hidden="true" class="text-[var(--color-rule)]">
+          |
+        </span>
+        {live ? (
+          <time class="italic" data-live-dateline data-location={location}>
+            {fallback}
+          </time>
+        ) : (
+          <span class="italic">{dateline}</span>
+        )}
       </>
     )
   }
 </p>
+
+{
+  live && (
+    <script is:inline>
+      document.querySelectorAll("[data-live-dateline]").forEach(function (el) {
+        var loc = el.getAttribute("data-location") || "Newark";
+        var now = new Date();
+        var today = now.toLocaleDateString(undefined, {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        });
+        el.textContent = loc + ", " + today;
+        el.setAttribute("datetime", now.toISOString().slice(0, 10));
+      });
+    </script>
+  )
+}
