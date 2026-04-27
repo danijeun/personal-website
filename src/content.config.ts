@@ -8,7 +8,7 @@ const projects = defineCollection({
       title: z.string(),
       slug: z.string().optional(),
       kicker: z.string(),
-      dek: z.string().max(140),
+      dek: z.string().max(120),
       year: z.number().int(),
       role: z.string(),
       stack: z.array(z.string()),
