@@ -17,6 +17,9 @@ const channels = [
   },
   { label: "Devpost", value: '<a href="https://devpost.com/danijeun">devpost.com/danijeun</a>' },
 ];
+
+const sent = Astro.url.searchParams.get("sent") === "1";
+const error = Astro.url.searchParams.get("error");
 ---
 
 <Base title="Contact" description="How to reach Daniel Jeun. Email, GitHub, LinkedIn, Devpost.">
@@ -36,11 +39,29 @@ const channels = [
 
     <section class="mt-12">
       <Kicker>Or write in</Kicker>
+      {sent && (
+        <p class="mt-4 border-l-2 border-[var(--color-red)] pl-4 font-[var(--font-serif)] italic text-[var(--text-body)]">
+          Filed. I'll write back from danijeun@gmail.com.
+        </p>
+      )}
+      {error && (
+        <p class="mt-4 border-l-2 border-[var(--color-red)] pl-4 font-[var(--font-serif)] italic text-[var(--text-body)]">
+          Spiked. {error}
+        </p>
+      )}
       <form
         method="POST"
         action="/api/contact"
         class="mt-4 grid grid-cols-1 gap-4"
       >
+        <input
+          type="text"
+          name="company"
+          tabindex="-1"
+          autocomplete="off"
+          aria-hidden="true"
+          style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0"
+        />
         <label class="block">
           <span
             class="font-[var(--font-sans)] uppercase tracking-[0.12em] text-[0.75rem] text-[var(--color-meta)]"
@@ -91,8 +112,7 @@ const channels = [
         <p
           class="font-[var(--font-sans)] text-[var(--text-meta)] italic text-[var(--color-meta)]"
         >
-          The form will start working in sprint 3 once the contact endpoint is wired. Until then,
-          email goes through.
+          One reply from a real person, usually within a day or two.
         </p>
       </form>
     </section>

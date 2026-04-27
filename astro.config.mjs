@@ -15,7 +15,11 @@ export default defineConfig({
   integrations: [
     mdx(),
     react(),
-    sitemap(),
+    sitemap({
+      filter: (page) => !page.includes("/dev/"),
+      changefreq: "monthly",
+      priority: 0.7,
+    }),
   ],
   vite: {
     plugins: [tailwindcss()],
