@@ -1,0 +1,29 @@
+---
+interface Props {
+  title?: string;
+  class?: string;
+}
+const { title, class: className = "" } = Astro.props;
+---
+
+<aside
+  class={`my-10 p-6 bg-[var(--color-tint)] ${className}`}
+  style="border-left: 3px solid var(--color-ink);"
+>
+  {
+    title && (
+      <p class="font-[var(--font-sans)] uppercase tracking-[0.18em] text-[var(--text-kicker)] font-semibold text-[var(--color-ink)] mb-3">
+        {title}
+      </p>
+    )
+  }
+  <div class="font-[var(--font-serif)] text-[1rem] leading-[1.55] text-[var(--color-ink)] sidebar-content">
+    <slot />
+  </div>
+</aside>
+
+<style>
+  .sidebar-content :global(p + p) {
+    margin-top: 0.75rem;
+  }
+</style>

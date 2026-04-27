@@ -1,0 +1,25 @@
+---
+interface Props {
+  attribution?: string;
+  class?: string;
+}
+const { attribution, class: className = "" } = Astro.props;
+---
+
+<blockquote
+  class={`my-12 py-6 border-y border-[var(--color-rule)] text-center ${className}`}
+>
+  <p
+    class="font-[var(--font-serif)] italic text-3xl md:text-4xl leading-[1.2] text-[var(--color-ink)]"
+    style="font-variation-settings: 'opsz' 144;"
+  >
+    <slot />
+  </p>
+  {
+    attribution && (
+      <footer class="mt-4 font-[var(--font-sans)] text-[var(--text-meta)] text-[var(--color-meta)] uppercase tracking-[0.12em]">
+        — {attribution}
+      </footer>
+    )
+  }
+</blockquote>

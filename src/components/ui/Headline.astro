@@ -1,0 +1,22 @@
+---
+interface Props {
+  level?: 1 | 2 | 3;
+  size?: "display" | "h1" | "h2" | "h3";
+  class?: string;
+}
+const { level = 1, size = "h1", class: className = "" } = Astro.props;
+const Tag = `h${level}` as "h1" | "h2" | "h3";
+const sizeMap = {
+  display: "text-5xl md:text-7xl lg:text-[6rem] leading-[0.95]",
+  h1: "text-4xl md:text-6xl leading-[1.0]",
+  h2: "text-3xl md:text-5xl leading-[1.05]",
+  h3: "text-2xl md:text-3xl leading-[1.15]",
+};
+---
+
+<Tag
+  class={`font-[var(--font-serif)] tracking-tight font-[450] ${sizeMap[size]} ${className}`}
+  style="font-variation-settings: 'opsz' 144;"
+>
+  <slot />
+</Tag>

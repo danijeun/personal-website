@@ -1,0 +1,14 @@
+---
+interface Props {
+  tone?: "rule" | "red" | "ink";
+  class?: string;
+}
+const { tone = "rule", class: className = "" } = Astro.props;
+const colorMap = {
+  rule: "border-[var(--color-rule)]",
+  red: "border-[var(--color-red)]",
+  ink: "border-[var(--color-ink)]",
+};
+---
+
+<hr class={`border-0 border-t ${colorMap[tone]} ${className}`} />

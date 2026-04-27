@@ -1,0 +1,53 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+interface Props {
+  src: ImageMetadata | string;
+  alt: string;
+  caption?: string;
+  credit?: string;
+  width?: number;
+  height?: number;
+  class?: string;
+}
+const {
+  src,
+  alt,
+  caption,
+  credit,
+  width,
+  height,
+  class: className = "",
+} = Astro.props;
+const isString = typeof src === "string";
+---
+
+<figure class={`my-10 ${className}`}>
+  {
+    isString ? (
+      <img
+        src={src as string}
+        alt={alt}
+        width={width}
+        height={height}
+        class="w-full h-auto block"
+      />
+    ) : (
+      <Image src={src as ImageMetadata} alt={alt} class="w-full h-auto block" />
+    )
+  }
+  {
+    (caption || credit) && (
+      <figcaption class="mt-3 font-[var(--font-sans)] text-[0.8125rem] text-[var(--color-meta)] italic">
+        {caption}
+        {credit && (
+          <span class="not-italic ml-2 text-[var(--color-meta)]">
+            <span aria-hidden="true">/ </span>
+            {credit}
+          </span>
+        )}
+      </figcaption>
+    )
+  }
+</figure>

@@ -1,0 +1,23 @@
+---
+interface Props {
+  href?: string;
+  active?: boolean;
+  class?: string;
+}
+const { href, active = false, class: className = "" } = Astro.props;
+const Tag = href ? "a" : "span";
+const base =
+  "inline-flex items-center font-[var(--font-sans)] uppercase tracking-[0.12em] text-[0.6875rem] font-medium px-2 py-1 border";
+const tone = active
+  ? "bg-[var(--color-ink)] text-[var(--color-cream)] border-[var(--color-ink)]"
+  : "bg-transparent text-[var(--color-ink)] border-[var(--color-rule)] hover:border-[var(--color-ink)]";
+const linkReset = href ? "no-underline" : "";
+---
+
+<Tag
+  href={href}
+  class={`${base} ${tone} ${linkReset} ${className}`}
+  style={href ? "border-bottom-width: 1px;" : ""}
+>
+  <slot />
+</Tag>

@@ -1,0 +1,23 @@
+---
+// Wrap the first paragraph of an article. The first letter of the slot text
+// gets a three line drop cap. Use as <DropCap><p>Lorem ipsum...</p></DropCap>
+// or rely on the .dropcap class applied by global styles to the first <p>.
+---
+
+<div class="dropcap-host">
+  <slot />
+</div>
+
+<style>
+  .dropcap-host :global(> p:first-of-type::first-letter) {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    float: left;
+    font-size: 4.4em;
+    line-height: 0.9;
+    padding: 0.05em 0.08em 0 0;
+    margin-top: 0.05em;
+    color: var(--color-ink);
+    font-variation-settings: "opsz" 144;
+  }
+</style>

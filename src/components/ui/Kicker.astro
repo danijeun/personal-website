@@ -1,0 +1,19 @@
+---
+interface Props {
+  tone?: "red" | "ink" | "meta";
+  as?: "p" | "span" | "div";
+  class?: string;
+}
+const { tone = "meta", as: Tag = "p", class: className = "" } = Astro.props;
+const colorMap = {
+  red: "text-[var(--color-red)]",
+  ink: "text-[var(--color-ink)]",
+  meta: "text-[var(--color-meta)]",
+};
+---
+
+<Tag
+  class={`font-[var(--font-sans)] uppercase tracking-[0.18em] text-[var(--text-kicker)] font-semibold ${colorMap[tone]} ${className}`}
+>
+  <slot />
+</Tag>

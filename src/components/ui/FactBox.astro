@@ -1,0 +1,36 @@
+---
+interface FactRow {
+  label: string;
+  value: string;
+}
+interface Props {
+  title?: string;
+  rows: FactRow[];
+  class?: string;
+}
+const { title = "The facts", rows, class: className = "" } = Astro.props;
+---
+
+<aside
+  class={`my-10 border-t border-b border-[var(--color-ink)] py-5 ${className}`}
+>
+  <p
+    class="font-[var(--font-sans)] uppercase tracking-[0.18em] text-[var(--text-kicker)] font-semibold text-[var(--color-ink)] mb-4"
+  >
+    {title}
+  </p>
+  <dl class="grid grid-cols-1 gap-y-2 sm:grid-cols-[10rem_1fr] sm:gap-x-6">
+    {
+      rows.map((row) => (
+        <>
+          <dt class="font-[var(--font-sans)] text-[var(--text-meta)] uppercase tracking-[0.1em] text-[var(--color-meta)]">
+            {row.label}
+          </dt>
+          <dd class="font-[var(--font-serif)] text-[1rem] text-[var(--color-ink)]">
+            <Fragment set:html={row.value} />
+          </dd>
+        </>
+      ))
+    }
+  </dl>
+</aside>

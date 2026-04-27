@@ -1,0 +1,22 @@
+---
+interface Props {
+  author?: string;
+  dateline?: string;
+  class?: string;
+}
+const { author = "Daniel Jeun", dateline, class: className = "" } = Astro.props;
+---
+
+<p
+  class={`font-[var(--font-sans)] text-[var(--text-meta)] text-[var(--color-meta)] flex flex-wrap items-baseline gap-x-3 ${className}`}
+>
+  <span class="text-[var(--color-ink)]">By {author}</span>
+  {
+    dateline && (
+      <>
+        <span aria-hidden="true" class="text-[var(--color-rule)]">|</span>
+        <span class="italic">{dateline}</span>
+      </>
+    )
+  }
+</p>

@@ -1,25 +1,59 @@
 ---
 import Base from "../layouts/Base.astro";
+import Masthead from "../components/ui/Masthead.astro";
+import Kicker from "../components/ui/Kicker.astro";
+import Headline from "../components/ui/Headline.astro";
+import Dek from "../components/ui/Dek.astro";
+import Byline from "../components/ui/Byline.astro";
+import SectionRule from "../components/ui/SectionRule.astro";
+import ArticleCard from "../components/ui/ArticleCard.astro";
 ---
 
 <Base>
-  <section class="mx-auto max-w-[var(--container-article)] px-6 pt-24 pb-32">
-    <p
-      class="font-[var(--font-sans)] text-[var(--text-kicker)] uppercase tracking-[0.18em] text-[var(--color-red)]"
-    >
-      Vol I &mdash; In progress
-    </p>
-    <h1 class="mt-6 font-[var(--font-serif)] text-5xl md:text-7xl leading-[0.95] tracking-tight">
-      Daniel Jeun
-    </h1>
-    <p class="mt-6 font-[var(--font-serif)] italic text-[var(--text-dek)] text-[var(--color-meta)]">
-      A site is being set in type. Come back soon.
-    </p>
-    <hr class="mt-10 border-0 border-t border-[var(--color-rule)]" />
-    <p
-      class="mt-6 font-[var(--font-sans)] text-[var(--text-meta)] text-[var(--color-meta)]"
-    >
-      Newark, NJ. Built with Astro. Drafts running daily.
+  <Masthead />
+
+  <section class="mx-auto max-w-3xl px-6 pt-12 pb-16">
+    <Kicker tone="red">The lede</Kicker>
+    <Headline size="display" class="mt-4">
+      Daniel Jeun builds AI things, then writes about what broke.
+    </Headline>
+    <Dek class="mt-6">
+      An AI engineer finishing a dual degree at NJIT, fencing on the side, building tools the way a
+      reporter writes a story: get the facts, cut the filler, file before deadline.
+    </Dek>
+    <Byline dateline="Newark, April 2026" class="mt-6" />
+  </section>
+
+  <SectionRule class="mx-auto max-w-3xl" />
+
+  <section class="mx-auto max-w-3xl px-6 py-10">
+    <Kicker>Featured</Kicker>
+    <div class="mt-2">
+      <ArticleCard
+        href="/projects/foresee"
+        kicker="Machine learning"
+        title="Foresee turns a CSV into an ML report in sixty seconds."
+        dek="React, Flask, Snowflake, Gemini 2.5. AI ranks the targets, three models train in parallel, the user gets a PDF."
+        year={2025}
+        size="lead"
+      />
+      <ArticleCard
+        href="/projects/fanar-mcp"
+        kicker="LLM infrastructure"
+        title="Function calling for an LLM that doesn't natively do it."
+        dek="A prompt engineering layer that bridges Fanar to the Model Context Protocol, plus an npm published server."
+        year={2025}
+      />
+      <ArticleCard
+        href="/projects/lets-play-brisca"
+        kicker="Hackathon"
+        title="Let's Play Brisca."
+        dek="48 hours, a Spanish deck I had to draw myself, and an AI that conserves trump cards like my friends do."
+        year={2025}
+      />
+    </div>
+    <p class="mt-6 font-[var(--font-sans)] text-[var(--text-meta)] uppercase tracking-[0.12em]">
+      <a href="/projects">More from the desk &rarr;</a>
     </p>
   </section>
 </Base>
