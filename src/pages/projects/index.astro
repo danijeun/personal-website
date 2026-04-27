@@ -1,0 +1,53 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import Masthead from "../../components/ui/Masthead.astro";
+import Kicker from "../../components/ui/Kicker.astro";
+import Headline from "../../components/ui/Headline.astro";
+import Dek from "../../components/ui/Dek.astro";
+import SectionRule from "../../components/ui/SectionRule.astro";
+import ArticleCard from "../../components/ui/ArticleCard.astro";
+import Tag from "../../components/ui/Tag.astro";
+
+const projects = await getCollection("projects");
+projects.sort((a, b) => (a.data.order ?? 100) - (b.data.order ?? 100));
+
+// Build a chip set from all unique stacks
+const allStacks = Array.from(new Set(projects.flatMap((p) => p.data.stack))).sort();
+---
+
+<Base title="Projects" description="Everything Daniel Jeun has shipped, archived, or is still building.">
+  <Masthead />
+
+  <section class="mx-auto max-w-3xl px-6 pt-12 pb-8">
+    <Kicker tone="red">The desk &middot; Section</Kicker>
+    <Headline size="h1" class="mt-3">Projects</Headline>
+    <Dek class="mt-5">
+      Everything I have built that is fit to publish. Sorted by editorial weight, not by date.
+    </Dek>
+  </section>
+
+  <section class="mx-auto max-w-3xl px-6">
+    <SectionRule />
+    <div class="py-6 flex flex-wrap gap-2">
+      <Tag href="/projects" active>All</Tag>
+      {allStacks.map((s) => <Tag href={`/projects?tag=${encodeURIComponent(s)}`}>{s}</Tag>)}
+    </div>
+    <SectionRule />
+  </section>
+
+  <section class="mx-auto max-w-3xl px-6 pb-24">
+    {
+      projects.map((p, i) => (
+        <ArticleCard
+          href={`/projects/${p.id.replace(/\.(md|mdx)$/, "")}`}
+          kicker={p.data.kicker}
+          title={p.data.title}
+          dek={p.data.dek}
+          year={p.data.year}
+          size={i === 0 ? "lead" : i < 3 ? "standard" : "compact"}
+        />
+      ))
+    }
+  </section>
+</Base>

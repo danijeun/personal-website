@@ -1,0 +1,32 @@
+---
+title: "Function calling for an LLM that doesn't natively support it."
+kicker: "LLM infrastructure"
+dek: "A prompt engineering layer that bridges Fanar to the Model Context Protocol, plus an npm published MCP server for Islamic RAG, image gen, and translation."
+year: 2025
+role: "Hackathon team"
+stack: ["TypeScript", "JavaScript", "MCP", "Fanar API", "npm"]
+links:
+  github: "https://github.com/danijeun/fanar-mcp-app"
+  npm: "https://www.npmjs.com/package/@danijeun/fanar-mcp-server"
+status: "shipped"
+featured: true
+order: 2
+pullQuote: "Fine tuning was the obvious answer. Prompting was the better one."
+whatBroke: "<em>Daniel: write this section. The strongest version is the moment when the prompt engineering trick first worked end to end.</em>"
+---
+
+Most modern LLMs ship with native function calling. Fanar, the Arabic centric Islamic AI assistant, does not. That makes it a poor fit for the Model Context Protocol out of the box, since MCP assumes the model can produce a structured tool call on demand.
+
+The usual fix is to fine tune. The fine tune is expensive and irreversible, which is the wrong tradeoff for a research demo.
+
+## The trick
+
+Use prompts. The web app wraps the Fanar chat with a system prompt that teaches the model to emit a tool call as a fenced JSON block when it needs one. The MCP layer parses the block, runs the tool, and pushes the result back as plain text in the next turn. Fanar never has to know it lives inside an MCP system. The MCP system never has to know its model is unusual.
+
+The result is a working MCP client paired with an LLM that was never built for it.
+
+## The server
+
+The companion repo is an MCP server published as an npm package, `@danijeun/fanar-mcp-server`. It exposes three tools to any MCP client: Islamic RAG over a curated corpus, image generation, and translation. You can run it as a CLI or wire it into Claude Desktop or any other MCP host.
+
+That part is less interesting on paper. It is the part that proves the architecture works in both directions.

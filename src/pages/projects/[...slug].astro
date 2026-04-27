@@ -1,0 +1,41 @@
+---
+import { getCollection, render } from "astro:content";
+import Article from "../../layouts/Article.astro";
+import PullQuote from "../../components/ui/PullQuote.astro";
+import Figure from "../../components/ui/Figure.astro";
+import Sidebar from "../../components/ui/Sidebar.astro";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects");
+  return projects.map((entry) => ({
+    params: { slug: entry.id.replace(/\.(md|mdx)$/, "") },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const data = entry.data;
+---
+
+<Article
+  title={data.title}
+  kicker={data.kicker}
+  dek={data.dek}
+  year={data.year}
+  role={data.role}
+  stack={data.stack}
+  links={data.links}
+  heroCaption={data.heroCaption}
+  heroCredit={data.heroCredit}
+  whatBroke={data.whatBroke}
+>
+  {
+    data.pullQuote && (
+      <Fragment slot="default">
+        <Content components={{ PullQuote, Figure, Sidebar }} />
+      </Fragment>
+    )
+  }
+  {!data.pullQuote && <Content components={{ PullQuote, Figure, Sidebar }} />}
+</Article>

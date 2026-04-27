@@ -10,7 +10,7 @@
   --color-red: #b1240a;
 
   /* Typography. Self host these in /public/fonts/. */
-  --font-serif: "Fraunces", "Times New Roman", Georgia, serif;
+  --font-serif: "Newsreader", "Times New Roman", Georgia, serif;
   --font-sans: "Libre Franklin", "Helvetica Neue", Arial, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 

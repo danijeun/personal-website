@@ -1,0 +1,70 @@
+---
+import Base from "../layouts/Base.astro";
+import Masthead from "../components/ui/Masthead.astro";
+import Kicker from "../components/ui/Kicker.astro";
+import Headline from "../components/ui/Headline.astro";
+import Dek from "../components/ui/Dek.astro";
+import Byline from "../components/ui/Byline.astro";
+import SectionRule from "../components/ui/SectionRule.astro";
+import Sidebar from "../components/ui/Sidebar.astro";
+
+const starters = [
+  "What is Daniel studying?",
+  "What's the most interesting AI project he's worked on?",
+  "Is he looking for an internship?",
+  "What sport does he do?",
+];
+---
+
+<Base
+  title="Ask"
+  description="A small Q and A column powered by Daniel's personal RAG. Ask anything about his background."
+>
+  <Masthead />
+
+  <article class="mx-auto max-w-3xl px-6 pt-10 pb-24">
+    <Kicker tone="red">The Q and A column</Kicker>
+    <Headline size="display" class="mt-3">Ask the desk.</Headline>
+    <Dek class="mt-5">
+      A small chatbot trained on Daniel's own writing, resume, and project notes. It answers
+      questions about him, and it knows when it doesn't know.
+    </Dek>
+    <Byline live location="Newark" class="mt-6" />
+    <SectionRule class="mt-8" />
+
+    <Sidebar title="Coming online in sprint 4">
+      <p>
+        The chatbot is wired to a personal retrieval system that runs separately from this site.
+        That service is being deployed this week. Until then this page is here as a draft, in the
+        same way an editor pencils in a column slot before the writer files.
+      </p>
+      <p>
+        When it ships, it will refuse to answer questions outside what it knows about. No
+        invention. No cleverness for its own sake.
+      </p>
+    </Sidebar>
+
+    <section class="mt-12">
+      <Kicker>Suggested questions</Kicker>
+      <ul class="mt-4 space-y-2">
+        {
+          starters.map((q) => (
+            <li>
+              <span class="font-[var(--font-serif)] italic text-[var(--color-meta)]">
+                &ldquo;{q}&rdquo;
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section class="mt-10">
+      <p
+        class="font-[var(--font-sans)] text-[var(--text-meta)] italic text-[var(--color-meta)]"
+      >
+        Want to talk to a human in the meantime? <a href="/contact">Email Daniel directly.</a>
+      </p>
+    </section>
+  </article>
+</Base>

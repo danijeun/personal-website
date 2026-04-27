@@ -1,0 +1,24 @@
+---
+title: "A heart disease model that explains itself."
+kicker: "Machine learning"
+dek: "UCI heart disease data, full preprocessing, three models, SHAP values for every prediction. Built to be inspected, not just scored."
+year: 2024
+role: "Solo"
+stack: ["Python", "scikit-learn", "XGBoost", "SHAP", "SMOTE"]
+links:
+  github: "https://github.com/danijeun/heart-disease-prediction"
+status: "shipped"
+featured: false
+order: 5
+whatBroke: "<em>Daniel: a real anecdote about feature engineering or class imbalance would slot in here.</em>"
+---
+
+Heart disease prediction is an old benchmark. The UCI dataset has been beaten to death. The interesting thing about doing it again is to do it well, with every step inspectable.
+
+## The pipeline
+
+Numerical features get the median for missing values. Categorical features get the mode. The target is binarized. Categorical columns are one hot encoded with `drop_first` to avoid multicollinearity. Numerical features are standardized. The split is eighty twenty with stratified sampling. SMOTE handles the class imbalance when needed.
+
+Three models train: Logistic Regression as the linear baseline, a Decision Tree for the interpretable middle, and an XGBoost ensemble for the score. Each one gets a SHAP pass so the prediction has a story attached.
+
+The point is not the score. The point is that a clinician looking at this can ask why the model said what it said and get an answer.

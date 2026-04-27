@@ -1,0 +1,100 @@
+---
+import Base from "../layouts/Base.astro";
+import Masthead from "../components/ui/Masthead.astro";
+import Kicker from "../components/ui/Kicker.astro";
+import Headline from "../components/ui/Headline.astro";
+import Dek from "../components/ui/Dek.astro";
+import Byline from "../components/ui/Byline.astro";
+import SectionRule from "../components/ui/SectionRule.astro";
+import Figure from "../components/ui/Figure.astro";
+import FactBox from "../components/ui/FactBox.astro";
+
+const facts = [
+  { label: "Education", value: "B.S. + M.S. Computer Science and Data Science, NJIT, '26" },
+  { label: "Based", value: "Newark, NJ" },
+  { label: "Athletics", value: "NJIT Men's Fencing, varsity, sabre, '26" },
+  { label: "Looking for", value: "AI / ML engineer roles, summer and full time" },
+  {
+    label: "Reach me",
+    value:
+      '<a href="mailto:danijeun@gmail.com">danijeun@gmail.com</a> &middot; <a href="https://github.com/danijeun">GitHub</a> &middot; <a href="https://www.linkedin.com/in/danijeun">LinkedIn</a>',
+  },
+];
+---
+
+<Base
+  title="About"
+  description="Daniel Jeun Valenzuela. AI engineer at NJIT, fencing on the side."
+>
+  <Masthead />
+
+  <article class="mx-auto max-w-3xl px-6 pt-10 pb-24">
+    <Kicker tone="red">The author</Kicker>
+    <Headline size="display" class="mt-3">About Daniel Jeun.</Headline>
+    <Dek class="mt-5">
+      Builds AI tools, studies CS and data science at NJIT, and spends a few evenings a week trying
+      to hit people with a sabre.
+    </Dek>
+    <Byline live location="Newark" class="mt-6" />
+    <SectionRule class="mt-8" />
+
+    <Figure
+      src="https://placehold.co/800x800/efe9dc/111111/png?text=Headshot+placeholder"
+      alt="Headshot of Daniel Jeun, placeholder."
+      caption="Headshot pending. Will be replaced before launch."
+    />
+
+    <div class="prose-article">
+      <p>
+        I'm Daniel. I am finishing a dual degree at the New Jersey Institute of Technology in
+        Computer Science and Data Science, graduating in the spring of 2026. I am also working
+        through an M.S. in Applied Artificial Intelligence at UC3M in parallel. The double schedule
+        is mostly a forcing function. It keeps me from polishing the same project forever.
+      </p>
+      <p>
+        Most of what I build sits in the same intersection: large language models doing useful work
+        with the help of real data. Foresee turns a spreadsheet into a model report. Fanar MCP
+        teaches an LLM that does not have function calling how to call functions anyway. Brisca is
+        a card game I built in a weekend because I missed game night in Spain. The pattern is to
+        ship something I would actually use, then write down what broke.
+      </p>
+      <p>
+        On the research side I'm a member of the DS 493 Capstone team at NJIT's Center for Big
+        Data. The project tunes a weather simulation with reinforcement learning, using a neural
+        surrogate so the real fourteen hour simulation only runs when the agent is confident. The
+        goal is a journal paper this year.
+      </p>
+      <p>
+        Off the laptop I fence sabre for the NJIT varsity team. It is an unhinged sport and I
+        recommend it.
+      </p>
+      <p>
+        If you want to talk, the email is below. The chatbot at <a href="/ask">/ask</a> can answer
+        most questions about my background using my own writing as the source. If it can't, it
+        will say so and point you at me directly.
+      </p>
+    </div>
+
+    <FactBox title="The facts" rows={facts} />
+  </article>
+</Base>
+
+<style>
+  .prose-article > p {
+    font-family: var(--font-serif);
+    font-size: var(--text-body);
+    line-height: 1.65;
+    margin-top: 1.1rem;
+  }
+  .prose-article > p:first-of-type::first-letter {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    float: left;
+    font-size: 4.4em;
+    line-height: 0.9;
+    padding: 0.05em 0.08em 0 0;
+    margin-top: 0.05em;
+    color: var(--color-ink);
+    font-variation-settings: "opsz" 72;
+  }
+</style>

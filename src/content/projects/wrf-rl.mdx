@@ -1,0 +1,31 @@
+---
+title: "Tuning a weather simulation with reinforcement learning."
+kicker: "Research"
+dek: "DS 493 Capstone. A neural surrogate stands in for a fourteen hour WRF run, an SAC agent explores it, and the real simulation only runs when the agent is confident."
+year: 2026
+role: "Capstone team, NJIT"
+stack: ["Python", "PyTorch", "WRF Solar", "SAC", "Latin Hypercube Sampling"]
+links:
+  github: "https://github.com/danijeun/wrf-visualization-app"
+status: "in_progress"
+featured: false
+order: 4
+pullQuote: "Each WRF simulation takes fourteen hours. The agent could not afford to be wrong."
+whatBroke: "<em>Daniel: this section needs the honest version of the surrogate failure modes. The Capstone team has the data.</em>"
+---
+
+The WRF Solar Brookhaven model is a real atmospheric physics simulation. It models how clouds affect the sunlight that reaches the ground. The case study is a single day in May 2009, when stratocumulus clouds were observed over the ARM Southern Great Plains site in Oklahoma.
+
+Two parameters control droplet behavior in those clouds. Tuning them by hand or by grid search is impractical because each simulation takes about fourteen hours on six cores.
+
+## The surrogate idea
+
+Run a small batch of real WRF evaluations using Latin Hypercube Sampling. Use those points to train a fast neural surrogate, an MLP that maps parameter pairs to a mean squared error against the observations. The surrogate is wrong, but it is wrong cheaply. Use it as the environment for an SAC reinforcement learning agent that explores thousands of parameter combinations in seconds.
+
+When the agent has a confident guess, run a real WRF simulation at that point. The real result joins the training data, the surrogate is refined, the agent gets smarter. Repeat.
+
+## Why this is interesting
+
+The agent never sees the real WRF directly. It sees a neural impression of it. The impression improves every iteration. The combined system uses real compute only where it matters and pretend compute everywhere else.
+
+This is a Capstone project. The work is being extended from a conference paper into a journal submission with the team at the NJIT Center for Big Data.

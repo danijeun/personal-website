@@ -1,0 +1,37 @@
+---
+title: "Foresee turns a CSV into an ML report in sixty seconds."
+kicker: "Machine learning"
+dek: "An AutoML platform that ranks targets with Gemini, trains three models in parallel, and hands back a PDF the user can read on the train home."
+year: 2025
+role: "Solo"
+stack: ["Python", "React", "Flask", "Snowflake", "Gemini 2.5", "XGBoost"]
+links:
+  github: "https://github.com/danijeun/foresee-app"
+status: "shipped"
+featured: true
+order: 1
+pullQuote: "The whole thing started because I got tired of writing the same five cells of pandas code at the start of every project."
+whatBroke: "Snowflake's free tier connection pool died once three EDA jobs ran in parallel. I queued them. Gemini also confidently picked the only column in a one column CSV as both the target and the feature, which was funny until it wasn't. <em>Daniel: replace this with the real story when you have a minute.</em>"
+---
+
+Upload a CSV. The system runs a full exploratory analysis on Snowflake while Gemini 2.5 reads the schema and ranks the top five columns most worth predicting. You pick one. Three models train in parallel, a Logistic Regression, a Decision Tree, and an XGBoost. You get back a PDF with metrics, confusion matrices, feature importances, and a short business rationale.
+
+The pitch is a minute. The hard part was making the minute feel honest.
+
+## How it actually works
+
+The frontend is a React app that streams progress from a Flask API. The first thing the API does on upload is push the file into Snowflake and start a parallel pair of jobs: an EDA pass that walks every column and computes the usual statistics, and a Gemini call that summarizes the schema and proposes ranked targets with importance scores from one to one hundred.
+
+The two jobs land at roughly the same time, which is the whole point. Sequential would be fine for a demo. It would not be fine for the user.
+
+## The model menu
+
+Three is a deliberate choice. One model feels like a guess. Five would push the report past one screen. Three covers the three things people usually want: a baseline they understand, a tree they can interpret, and a boosted ensemble for the score.
+
+Each one trains, validates, and produces SHAP values for the top features. The PDF is rendered on the server with a templated layout so every report looks like it came from the same publication.
+
+<Sidebar title="What I'd do differently">
+The biggest single shortcut was assuming the user's CSV was clean enough to train on after one preprocessing pass. About half are. The other half need a second look, and I'd surface that decision instead of hiding it. There is also a long discussion to be had about whether the AI ranked target is actually a good target, which Gemini cannot fully answer alone.
+</Sidebar>
+
+The `whatBroke` field below is a placeholder until I get the real text from Daniel.

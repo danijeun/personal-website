@@ -1,0 +1,33 @@
+---
+title: "Let's Play Brisca."
+kicker: "Hackathon"
+dek: "Forty eight hours. A Spanish deck I had to draw myself. An AI that conserves trump cards the way my friends do."
+year: 2025
+role: "Solo"
+stack: ["React", "Flask", "Framer Motion", "Claude Sonnet 4.5"]
+links:
+  github: "https://github.com/danijeun/lets-play-brisca"
+status: "shipped"
+featured: true
+order: 3
+pullQuote: "Watching the AI make a play I didn't program explicitly. That's when I knew."
+whatBroke: "<em>Daniel: write this. The moment the AI dumped a low card strategically is in the README and would land here, but the messy version is what's worth reading.</em>"
+---
+
+Couldn't find a Spanish deck anywhere on the web that didn't look like clip art, so I drew one. That was hour two of the forty eight. The Claude Builder Club app challenge had a deadline, so the deck design and the rules engine had to land in parallel.
+
+Brisca is a forty card baraja española. No eights, no nines. Trumps shift the game. The point is not the rules. The point is what happens when someone drops an As at the right moment.
+
+## The AI
+
+Three difficulty levels, all built on top of Claude Sonnet 4.5. The hardest one keeps a count of what's been played, watches for the trump suit, conserves its high cards, and goes for the trick when the points are worth it. The easiest one plays like my friend on his third beer.
+
+The version that actually shipped was the hard one. The other two are dumber on purpose.
+
+## The moment
+
+The clip in the README is the truth: the AI counted the remaining cards, did the math on the trick value, and dumped a low card to bait a trump out of the player. I did not write that as an instruction. It emerged from the strategy prompt and the game state.
+
+That was the moment the project stopped being a card game and started being a card player.
+
+The animations are Framer Motion. The art is pixel work I did between dev sessions. None of it is replacing game night with friends in Spain. All of it is closer than nothing.
