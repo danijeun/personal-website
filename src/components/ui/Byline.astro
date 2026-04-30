@@ -14,14 +14,14 @@ const {
   class: className = "",
 } = Astro.props;
 
-// Build time fallback for crawlers and no JS visitors. Localized to America/New_York
-// so the cached HTML still shows a sensible date until the client script runs.
+// Build time fallback. Month + year only, because anything more specific
+// (weekday, day) goes stale the moment the CDN serves a cached build.
+// The client script below replaces this with the visitor's real current
+// date as soon as JS runs.
 const fallback = live
   ? `${location}, ${new Date().toLocaleDateString("en-US", {
-      weekday: "long",
       year: "numeric",
       month: "long",
-      day: "numeric",
       timeZone: "America/New_York",
     })}`
   : null;
@@ -52,8 +52,9 @@ const fallback = live
 {
   live && (
     <script is:inline>
-      document.querySelectorAll("[data-live-dateline]").forEach(function (el) {
-        var loc = el.getAttribute("data-location") || "Newark";
+      (function () {
+        var nodes = document.querySelectorAll("[data-live-dateline]");
+        if (!nodes.length) return;
         var now = new Date();
         var today = now.toLocaleDateString(undefined, {
           weekday: "long",
@@ -61,9 +62,15 @@ const fallback = live
           month: "long",
           day: "numeric",
         });
-        el.textContent = loc + ", " + today;
-        el.setAttribute("datetime", now.toISOString().slice(0, 10));
-      });
+        var iso = now.getFullYear() + "-" +
+          String(now.getMonth() + 1).padStart(2, "0") + "-" +
+          String(now.getDate()).padStart(2, "0");
+        nodes.forEach(function (el) {
+          var loc = el.getAttribute("data-location") || "Newark";
+          el.textContent = loc + ", " + today;
+          el.setAttribute("datetime", iso);
+        });
+      })();
     </script>
   )
 }

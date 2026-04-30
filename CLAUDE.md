@@ -7,7 +7,7 @@ GitHub: https://github.com/danijeun
 LinkedIn: https://www.linkedin.com/in/danijeun
 Devpost: https://devpost.com/danijeun
 Repo: https://github.com/danijeun/personal-website
-Domain: danijeun.com (registered with GoDaddy)
+Domain: danijeun.com (registered with GoDaddy, DNS pointed at Vercel, live)
 Current site: https://danijeun.github.io/danijeun_web/ (to be replaced)
 
 ---
