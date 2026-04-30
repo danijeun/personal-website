@@ -82,11 +82,16 @@ const facts = [
 </Base>
 
 <style>
+  .prose-article {
+    hyphens: none;
+    text-justify: inter-word;
+  }
   .prose-article > p {
     font-family: var(--font-serif);
     font-size: var(--text-body);
     line-height: 1.65;
     margin-top: 1.1rem;
+    text-align: justify;
   }
   .prose-article > p:first-of-type::first-letter {
     font-family: var(--font-serif);

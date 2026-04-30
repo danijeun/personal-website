@@ -6,7 +6,7 @@ import Headline from "../components/ui/Headline.astro";
 import Dek from "../components/ui/Dek.astro";
 import Byline from "../components/ui/Byline.astro";
 import SectionRule from "../components/ui/SectionRule.astro";
-import Sidebar from "../components/ui/Sidebar.astro";
+import AskWidget from "../components/islands/AskWidget.tsx";
 
 const starters = [
   "What is Daniel studying?",
@@ -32,39 +32,11 @@ const starters = [
     <Byline live location="Newark" class="mt-6" />
     <SectionRule class="mt-8" />
 
-    <Sidebar title="Coming online in sprint 4">
-      <p>
-        The chatbot is wired to a personal retrieval system that runs separately from this site.
-        That service is being deployed this week. Until then this page is here as a draft, in the
-        same way an editor pencils in a column slot before the writer files.
-      </p>
-      <p>
-        When it ships, it will refuse to answer questions outside what it knows about. No
-        invention. No cleverness for its own sake.
-      </p>
-    </Sidebar>
+    <p class="mt-8 font-[var(--font-serif)] text-[1.0625rem] leading-relaxed text-[var(--color-ink)]">
+      Twenty questions per network per day. Six turn cap per conversation. If the bot doesn't have
+      the answer in its notes, it says so. No invention.
+    </p>
 
-    <section class="mt-12">
-      <Kicker>Suggested questions</Kicker>
-      <ul class="mt-4 space-y-2">
-        {
-          starters.map((q) => (
-            <li>
-              <span class="font-[var(--font-serif)] italic text-[var(--color-meta)]">
-                &ldquo;{q}&rdquo;
-              </span>
-            </li>
-          ))
-        }
-      </ul>
-    </section>
-
-    <section class="mt-10">
-      <p
-        class="font-[var(--font-sans)] text-[var(--text-meta)] italic text-[var(--color-meta)]"
-      >
-        Want to talk to a human in the meantime? <a href="/contact">Email Daniel directly.</a>
-      </p>
-    </section>
+    <AskWidget client:load starters={starters} />
   </article>
 </Base>

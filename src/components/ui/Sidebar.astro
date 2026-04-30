@@ -23,6 +23,11 @@ const { title, class: className = "" } = Astro.props;
 </aside>
 
 <style>
+  .sidebar-content {
+    text-align: justify;
+    hyphens: none;
+    text-justify: inter-word;
+  }
   .sidebar-content :global(p + p) {
     margin-top: 0.75rem;
   }
